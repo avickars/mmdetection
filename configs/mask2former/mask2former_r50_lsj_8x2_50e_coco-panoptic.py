@@ -140,7 +140,8 @@ model = dict(
     init_cfg=None)
 
 # dataset settings
-image_size = (1024, 1024)
+# image_size = (1024, 1024)
+image_size = (512, 512)
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
 train_pipeline = [
@@ -229,7 +230,7 @@ lr_config = dict(
     warmup_ratio=1.0,  # no warmup
     warmup_iters=10)
 
-max_iters = 368750
+max_iters = 100000
 runner = dict(type='IterBasedRunner', max_iters=max_iters)
 
 log_config = dict(
@@ -241,7 +242,7 @@ log_config = dict(
 interval = 5000
 workflow = [('train', interval)]
 checkpoint_config = dict(
-    by_epoch=False, interval=interval, save_last=True, max_keep_ckpts=3)
+    by_epoch=False, interval=interval, save_last=True, max_keep_ckpts=10)
 
 # Before 365001th iteration, we do evaluation every 5000 iterations.
 # After 365000th iteration, we do evaluation every 368750 iterations,
