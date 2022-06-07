@@ -13,8 +13,8 @@ model = dict(
     test_cfg=dict(panoptic_on=False))
 
 # dataset settings
-# image_size = (1024, 1024)
-image_size = (512, 512)
+image_size = (1024, 1024)
+# image_size = (512, 512)
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
 pad_cfg = dict(img=(128, 128, 128), masks=0, seg=255)
@@ -78,3 +78,5 @@ data = dict(
         img_prefix=data_root + 'val2017/',
         pipeline=test_pipeline))
 evaluation = dict(metric=['bbox', 'segm'])
+
+resume_from = 'work_dirs/mask2former_r50_lsj_8x2_50e_coco/latest.pth'
