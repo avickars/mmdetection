@@ -79,4 +79,4 @@ data = dict(
         pipeline=test_pipeline))
 evaluation = dict(metric=['bbox', 'segm'])
 
-resume_from = 'work_dirs/mask2former_r50_lsj_8x2_50e_coco/latest.pth'
+load_from = 'work_dirs/mask2former_r50_lsj_8x2_50e_coco/latest.pth'

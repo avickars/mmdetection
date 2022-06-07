@@ -230,7 +230,7 @@ lr_config = dict(
     warmup_ratio=1.0,  # no warmup
     warmup_iters=10)
 
-max_iters = 200000
+max_iters = 100000
 runner = dict(type='IterBasedRunner', max_iters=max_iters)
 
 log_config = dict(
