@@ -114,6 +114,13 @@ train_pipeline = [
     dict(type='DefaultFormatBundle'),
     dict(type='Collect', keys=['img', 'gt_bboxes', 'gt_labels', 'gt_masks']),
 ]
+
+log_config = dict(
+    interval=50,
+    hooks=[
+        dict(type='TextLoggerHook', by_epoch=False),
+        dict(type='TensorboardLoggerHook', by_epoch=False)
+    ])
 test_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(
@@ -157,9 +164,11 @@ lr_config = dict(
     step=[20, 42, 49, 52])
 runner = dict(type='EpochBasedRunner', max_epochs=55)
 cudnn_benchmark = True
-evaluation = dict(metric=['bbox', 'segm'])
+evaluation = dict(metric=['bbox', 'segm'], )
 
 # NOTE: `auto_scale_lr` is for automatically scaling LR,
 # USER SHOULD NOT CHANGE ITS VALUES.
 # base_batch_size = (1 GPUs) x (8 samples per GPU)
-auto_scale_lr = dict(base_batch_size=8)
+auto_scale_lr = dict(base_batch_size=8, interval=1)
+
+resume_from = 'work_dirs/yolact_r101_1x8_coco/latest.pth'
