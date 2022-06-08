@@ -54,7 +54,8 @@ test_pipeline = [
             dict(type='Normalize', **img_norm_cfg),
             dict(type='ImageToTensor', keys=['img']),
             dict(type='Collect', keys=['img']),
-        ])
+        ]),
+
 ]
 dataset_type = 'CocoDataset'
 data_root = 'data/coco/'
@@ -79,4 +80,4 @@ data = dict(
         pipeline=test_pipeline))
 evaluation = dict(metric=['bbox', 'segm'])
 
-resume_from = 'work_dirs/mask2former_r50_lsj_8x2_50e_coco/latest.pth'
+# resume_from = 'work_dirs/mask2former_r50_lsj_8x2_50e_coco/latest.pth'
