@@ -91,6 +91,14 @@ def draw_bboxes(ax, bboxes, color='g', alpha=0.8, thickness=2):
     Returns:
         matplotlib.Axes: The result axes.
     """
+    np.random.seed(1)
+    # random_colors = np.random.randint(0, 255, (len(color), 3))
+    random_colors = np.random.randint(0, 255, (max(100, len(color)), 3))
+    random_colors = random_colors[0:len(color),:]
+    color = [tuple(c) for c in random_colors]
+    color = np.array(color, dtype=np.uint8)
+    color = color / 255
+    color = list(map(tuple, color))
     polygons = []
     for i, bbox in enumerate(bboxes):
         bbox_int = bbox.astype(np.int32)
@@ -178,10 +186,17 @@ def draw_masks(ax, img, masks, color=None, with_edge=True, alpha=0.8):
         ndarray: The result image.
     """
     taken_colors = set([0, 0, 0])
+    # print('************************', color)
     if color is None:
         random_colors = np.random.randint(0, 255, (masks.size(0), 3))
         color = [tuple(c) for c in random_colors]
         color = np.array(color, dtype=np.uint8)
+    np.random.seed(1)
+    random_colors = np.random.randint(0, 255, (max(100, masks.shape[0]), 3))
+    # random_colors = np.random.randint(0, 255, (masks.shape[0], 3))
+    random_colors = random_colors[0:masks.shape[0], :]
+    color = [tuple(c) for c in random_colors]
+    color = np.array(color, dtype=np.uint8)
     polygons = []
     for i, mask in enumerate(masks):
         if with_edge:
