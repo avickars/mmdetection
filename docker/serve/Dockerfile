@@ -1,12 +1,18 @@
-ARG PYTORCH="1.6.0"
-ARG CUDA="10.1"
-ARG CUDNN="7"
+ARG PYTORCH="1.10.0"
+ARG CUDA="11.3"
+ARG CUDNN="8"
 FROM pytorch/pytorch:${PYTORCH}-cuda${CUDA}-cudnn${CUDNN}-devel
 
 ARG MMCV="1.3.17"
 ARG MMDET="2.25.0"
 
 ENV PYTHONUNBUFFERED TRUE
+
+RUN rm /etc/apt/sources.list.d/cuda.list
+RUN rm /etc/apt/sources.list.d/nvidia-ml.list
+RUN apt-key del 7fa2af80
+RUN apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/3bf863cc.pub
+RUN apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/x86_64/7fa2af80.pub
 
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y \
@@ -22,6 +28,7 @@ RUN export FORCE_CUDA=1
 
 # TORCHSEVER
 RUN pip install torchserve torch-model-archiver
+RUN pip install nvgpu
 
 # MMLAB
 ARG PYTORCH
