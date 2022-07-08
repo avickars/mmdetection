@@ -124,3 +124,12 @@ work_dirs/
 *.sh~
 
 *.mp4
+/results/
+
+*.deb
+
+*.mar
+
+3dogs.jpg
+
+result.jpeg

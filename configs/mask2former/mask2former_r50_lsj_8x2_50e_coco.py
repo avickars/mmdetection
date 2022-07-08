@@ -58,8 +58,8 @@ test_pipeline = [
 
 ]
 dataset_type = 'CocoDataset'
-# data_root = '/home/aidan/fiftyone/coco/'
-data_root = '/home/aidan/fiftyone/coco-cropped/'
+data_root = '/home/aidan/fiftyone/coco/'
+# data_root = '/home/aidan/fiftyone/coco-cropped/'
 data = dict(
     _delete_=True,
     samples_per_gpu=2,

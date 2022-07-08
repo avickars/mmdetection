@@ -81,7 +81,7 @@ def build_model_from_cfg(config_path, checkpoint_path, cfg_options=None):
     # set cudnn_benchmark
     if cfg.get('cudnn_benchmark', False):
         torch.backends.cudnn.benchmark = True
-    cfg.model.pretrained = None
+    # cfg.model.pretrained = None
     cfg.data.test.test_mode = True
 
     # build the model
