@@ -34,6 +34,7 @@ def main(args):
     model = init_detector(args.config, args.checkpoint, device=args.device)
     # test a single image
     result = inference_detector(model, args.img)
+
     # show the results
     show_result_pyplot(
         model,

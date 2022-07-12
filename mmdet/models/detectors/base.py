@@ -322,6 +322,7 @@ class BaseDetector(BaseModule, metaclass=ABCMeta):
             np.full(bbox.shape[0], i, dtype=np.int32)
             for i, bbox in enumerate(bbox_result)
         ]
+
         labels = np.concatenate(labels)
         # draw segmentation masks
         segms = None
@@ -331,6 +332,7 @@ class BaseDetector(BaseModule, metaclass=ABCMeta):
                 segms = torch.stack(segms, dim=0).detach().cpu().numpy()
             else:
                 segms = np.stack(segms, axis=0)
+
         # if out_file specified, do not show image in window
         if out_file is not None:
             show = False

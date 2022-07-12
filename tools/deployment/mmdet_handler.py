@@ -55,17 +55,21 @@ class MMdetHandler(BaseHandler):
                     segm_result = segm_result[0]  # ms rcnn
             else:
                 bbox_result, segm_result = image_result, None
+            # print('**********************************', segm_result[17][0].shape)
 
             for class_index, class_result in enumerate(bbox_result):
                 class_name = self.model.CLASSES[class_index]
-                for bbox in class_result:
+                for index, bbox in enumerate(class_result):
                     bbox_coords = bbox[:-1].tolist()
                     score = float(bbox[-1])
+                    mask = segm_result[class_index][index].tolist()
+
                     if score >= self.threshold:
                         output[image_index].append({
                             'class_name': class_name,
                             'bbox': bbox_coords,
-                            'score': score
+                            'score': score,
+                            'mask': mask
                         })
 
         return output
